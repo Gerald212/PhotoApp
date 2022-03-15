@@ -12,6 +12,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.File;
 import java.io.IOException;
@@ -21,14 +22,19 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    String currentPhotoPath;
-    Uri currentUri;
+    String currentPhotoPath = "";
+    //Uri currentUri = null;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        if(!currentPhotoPath.isEmpty()){
+            ImageView iv = findViewById(R.id.photoDisplay);
+            iv.setImageURI(Uri.parse(currentPhotoPath));
+        }
     }
 
     @Override
@@ -41,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             //Bitmap imageBitmap = (Bitmap) extras.get("data");
 
             //iv.setImageBitmap(imageBitmap);
-            iv.setImageURI(currentUri);
+            iv.setImageURI(Uri.parse(currentPhotoPath));
         }
 
     }
@@ -63,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = image.getAbsolutePath();
+        TextView tv = findViewById(R.id.tekst);
+        tv.setText(currentPhotoPath);
         return image;
     }
 
@@ -75,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
 //            // display error state to the user
 //        }
 //    }
+
 
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -95,9 +104,18 @@ public class MainActivity extends AppCompatActivity {
                         photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-                currentUri = photoURI;
+                galleryAddPic();
+                //currentUri = photoURI;
             }
         }
+    }
+
+    private void galleryAddPic() {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File(currentPhotoPath);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        this.sendBroadcast(mediaScanIntent);
     }
 
 

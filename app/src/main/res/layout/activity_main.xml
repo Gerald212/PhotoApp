@@ -28,6 +28,7 @@
                 android:id="@+id/photoDisplay"
                 android:layout_width="350dp"
                 android:layout_height="350dp"
+                android:scaleType="fitCenter"
                 app:srcCompat="@drawable/ic_launcher_background" />
         </TableRow>
 

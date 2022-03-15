@@ -30,11 +30,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        if(!currentPhotoPath.isEmpty()){
-            ImageView iv = findViewById(R.id.photoDisplay);
-            iv.setImageURI(Uri.parse(currentPhotoPath));
-        }
     }
 
     @Override
@@ -49,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
             //iv.setImageBitmap(imageBitmap);
             iv.setImageURI(Uri.parse(currentPhotoPath));
         }
-
     }
 
     public void photoButtonOnClick(View view){
@@ -69,8 +63,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Save a file: path for use with ACTION_VIEW intents
         currentPhotoPath = image.getAbsolutePath();
-        TextView tv = findViewById(R.id.tekst);
-        tv.setText(currentPhotoPath);
+        //TextView tv = findViewById(R.id.tekst);
+        //tv.setText(currentPhotoPath);
         return image;
     }
 

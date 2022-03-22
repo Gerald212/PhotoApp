@@ -13,6 +13,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.FileUtils;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     static String currentPhotoPath = "";
     //Uri currentUri = null;
 
+    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,12 +145,12 @@ public class MainActivity extends AppCompatActivity {
             //FileInputStream fileInputStream = new FileInputStream(file);
 
 
-
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
             urlConnection.disconnect();
         }
+
     }
 
     private void setPic() {

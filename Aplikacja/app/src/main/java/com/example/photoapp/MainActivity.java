@@ -1,5 +1,6 @@
 package com.example.photoapp;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.FileProvider;
 
@@ -8,16 +9,24 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.os.FileUtils;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.Console;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -58,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void photoButtonOnClick(View view){
         dispatchTakePictureIntent();
+    }
+
+    public void sendButtonOnClick(View view){
+        postPhoto();
     }
 
     private File createImageFile() throws IOException {
@@ -112,12 +125,30 @@ public class MainActivity extends AppCompatActivity {
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
                 //galleryAddPic();
+                //Log.i("Tag","Wiadomosc");
             }
         }
     }
 
+    //https://stackoverflow.com/questions/11766878/sending-files-using-post-with-httpurlconnection
     private void postPhoto(){
+        HttpURLConnection urlConnection = null;
 
+        try {
+            URL url = new URL("http://192.168.129.29:8080/test/put_image");
+            urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setRequestMethod("POST");
+
+            File file = new File(currentPhotoPath);
+            //FileInputStream fileInputStream = new FileInputStream(file);
+
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            urlConnection.disconnect();
+        }
     }
 
     private void setPic() {

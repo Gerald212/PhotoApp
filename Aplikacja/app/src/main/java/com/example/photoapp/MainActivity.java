@@ -24,7 +24,7 @@ import java.util.Date;
 public class MainActivity extends AppCompatActivity {
 
     static final int REQUEST_IMAGE_CAPTURE = 1;
-    String currentPhotoPath = "";
+    static String currentPhotoPath = "";
     //Uri currentUri = null;
 
 
@@ -33,9 +33,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         if(!currentPhotoPath.isEmpty()){
-            //ImageView iv = findViewById(R.id.photoDisplay);
-            //iv.setImageURI(Uri.parse(currentPhotoPath));
-            setPic();
+            ImageView iv = findViewById(R.id.photoDisplay);
+            iv.setImageURI(Uri.parse(currentPhotoPath));
+            //setPic();
         }
     }
 
@@ -114,6 +114,10 @@ public class MainActivity extends AppCompatActivity {
                 //galleryAddPic();
             }
         }
+    }
+
+    private void postPhoto(){
+
     }
 
     private void setPic() {

@@ -1,10 +1,7 @@
 package org.example;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import org.example.StorageService;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -14,13 +11,6 @@ import java.nio.file.Paths;
 @RestController
 @RequestMapping("/test")
 public class WebController {
-
-//    private final StorageService storageService;
-//
-//    @Autowired
-//    public WebController(StorageService storageService) {
-//        this.storageService = storageService;
-//    }
 
     @GetMapping("/hello")
     public String abc(){
@@ -34,12 +24,13 @@ public class WebController {
         try {
             byte[] bytes = img.getBytes();
 
-            Path path = Paths.get("/" + img.getOriginalFilename());
-            Files.write(path, bytes);
+            Path path = Paths.get("./zdjecia/" + img.getOriginalFilename());
+            Files.createDirectories(path.getParent());
 
+            Files.write(path, bytes);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        System.out.println( "Zaladowano zdjecie" );
+        System.out.println( "Zaladowano zdjecie: " + img.getOriginalFilename() );
     }
 }

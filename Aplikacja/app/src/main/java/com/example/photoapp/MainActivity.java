@@ -72,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         if(!currentPhotoPath.isEmpty()){
             ImageView iv = findViewById(R.id.photoDisplay);
             iv.setImageURI(Uri.parse(currentPhotoPath));
-            //setPic();
         }
     }
 

@@ -78,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         SharedPreferences sp = getSharedPreferences("ip", Context.MODE_PRIVATE);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
     }
 
     @Override

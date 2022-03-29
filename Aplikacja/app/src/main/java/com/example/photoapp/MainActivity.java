@@ -92,6 +92,11 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void settingsButtonOnClick(View view){
+        Intent intent = new Intent(this, SetingsActivity.class);
+        startActivity(intent);
+    }
+
     public void photoButtonOnClick(View view){
         dispatchTakePictureIntent();
     }

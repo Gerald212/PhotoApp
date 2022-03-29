@@ -8,7 +8,9 @@ import androidx.core.content.FileProvider;
 import android.Manifest;
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,6 +20,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.FileUtils;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
@@ -73,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
             ImageView iv = findViewById(R.id.photoDisplay);
             iv.setImageURI(Uri.parse(currentPhotoPath));
         }
+
+        SharedPreferences sp = getSharedPreferences("ip", Context.MODE_PRIVATE);
     }
 
     @Override

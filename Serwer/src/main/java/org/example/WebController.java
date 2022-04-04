@@ -18,7 +18,7 @@ public class WebController {
     }
 
     @PostMapping("/put_image")
-    public void putImage(@RequestPart(name = "img") MultipartFile img){
+    public String putImage(@RequestPart(name = "img") MultipartFile img){
         //storageService.store(img);
         System.out.println( "cos przyszlo" );
         try {
@@ -32,5 +32,7 @@ public class WebController {
             e.printStackTrace();
         }
         System.out.println( "Zaladowano zdjecie: " + img.getOriginalFilename() );
+
+        return "zdjecie przyszlo";
     }
 }

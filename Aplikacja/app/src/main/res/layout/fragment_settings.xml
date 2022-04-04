@@ -28,7 +28,6 @@
             android:id="@+id/setIpButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="setIpButtonOnClick"
             android:text="Ustaw IP" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

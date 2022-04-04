@@ -77,8 +77,22 @@ public class MainActivity extends AppCompatActivity {
             iv.setImageURI(Uri.parse(currentPhotoPath));
         }
 
-        SharedPreferences sp = getSharedPreferences("ip", Context.MODE_PRIVATE);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+        TextView tv = findViewById(R.id.textViewIp);
+        tv.setText("Obecne ip: " + adresSerwera);
+
+        //SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        SharedPreferences sp = getSharedPreferences("my_pref", Context.MODE_PRIVATE);
+        String newIp = sp.getString("ip", "127.0.0.1");
+        Log.i("ip w mainActivity", newIp);
+        adresSerwera = newIp;
+
+        TextView tv = findViewById(R.id.textViewIp);
+        tv.setText("Obecne ip serwera: " + adresSerwera);
     }
 
     @Override
